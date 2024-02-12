@@ -43,16 +43,6 @@ server.Start(ws =>
             Console.WriteLine(ex.StackTrace);
             ex.Handle(ws, message);
         }
-        /* Very simply forward message to all connections, except where it came from:
-        foreach (var connection in wsConnections)
-        {
-                if (connection.Key == ws.ConnectionInfo.Id)
-                {
-                        continue;
-                }
-                connection.Value.Send(message);
-        }
-        */
     };
 });
 
