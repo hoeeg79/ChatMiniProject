@@ -15,6 +15,7 @@ public class ClientWantsToBroadcastToRoomDto : BaseDto
 }
 
 [ValidateDataAnnotations]
+[AuthenticationValidation]
 public class ClientWantsToBroadcastToRoom : BaseEventHandler<ClientWantsToBroadcastToRoomDto>
 {
     private readonly ChatRepository _repo;

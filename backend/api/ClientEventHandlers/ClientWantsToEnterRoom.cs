@@ -13,6 +13,7 @@ public class ClientWantsToEnterRoomDto : BaseDto
 }
 
 [ValidateDataAnnotations]
+[AuthenticationValidation]
 public class ClientWantsToEnterRoom : BaseEventHandler<ClientWantsToEnterRoomDto>
 {
     private readonly ChatRepository _repo;

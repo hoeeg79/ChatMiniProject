@@ -1,14 +1,15 @@
+using api.Models;
 using Fleck;
 
 namespace api;
 
 public static class ConnectionStates
 {
-    public static Dictionary<Guid, wsMetadata> Connections = new ();
+    public static Dictionary<Guid, WsMetadata> Connections = new ();
     public static Dictionary<int,HashSet<Guid>> Rooms = new ();
     public static bool AddConnection(IWebSocketConnection ws)
     {
-        return Connections.TryAdd(ws.ConnectionInfo.Id, new wsMetadata(ws));
+        return Connections.TryAdd(ws.ConnectionInfo.Id, new WsMetadata(ws));
     }
 
     public static bool AddToRoom(IWebSocketConnection ws, int room)
@@ -38,8 +39,3 @@ public static class ConnectionStates
     }
 }
 
-public class wsMetadata(IWebSocketConnection connection)
-{
-    public IWebSocketConnection Connection { get; set; } = connection;
-    public string Username { get; set; }
-}
