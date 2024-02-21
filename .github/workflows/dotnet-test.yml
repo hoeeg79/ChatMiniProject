@@ -10,7 +10,7 @@ jobs:
   tests:
     runs-on: ubuntu-22.04
     env:
-      FULLSTACK_AZURE_COGNITIVE_SERVICES: ${{ secrets.PGCONN }}
+      pgconn: ${{ secrets.PGCONN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-dotnet@v4
