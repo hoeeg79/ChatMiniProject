@@ -1,0 +1,19 @@
+name: Dotnet test
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: ubuntu@latest
+    env:
+      FULLSTACK_AZURE_COGNITIVE_SERVICES: ${{ secrets.PGCONN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+      - run: cd backend/Tests && dotnet test
