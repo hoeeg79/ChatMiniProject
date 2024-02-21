@@ -10,6 +10,7 @@ public class Test
     public void SetupThatShit()
     {
         HelperBitch.TriggerRebuild();
+        Startup.Statup(null);
     }
     
     [Test]
