@@ -16,4 +16,4 @@ jobs:
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - run: cd backend/Tests && dotnet test
+      - run: cd backend/tests && dotnet test
