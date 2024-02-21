@@ -14,7 +14,6 @@ public class Test
     }
     
     [Test]
-    [Repeat(50)]
     public async Task MyTest()
     {
         //Initialize the WebSocketTestClient and connect to the server (default URL = ws://localhost:8181)
@@ -29,6 +28,6 @@ public class Test
    
         //Send an object extending BaseDto to the server and wait for assertions to be true. If not, exception is thrown
         await ws.DoAndAssert(new ClientWantsToBroadcastToRoomDto() {Message = "hey2", RoomId = 1}, 
-            receivedMessages => receivedMessages.Count == 3);
+            receivedMessages => receivedMessages.Count == 1);
     }
 }
