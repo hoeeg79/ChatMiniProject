@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoomsComponent } from './rooms/rooms.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontend-boostrap';
+  title = 'The Chad';
+  rooms = [new RoomsComponent, new RoomsComponent];
+  signedIn: boolean = false;
+
+  onSignIn(){
+    this.signedIn = true;
+  }
 }
