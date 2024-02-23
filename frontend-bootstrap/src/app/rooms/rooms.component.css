@@ -1,0 +1,8 @@
+.message-container {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 7px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow for the raised effect */
+}

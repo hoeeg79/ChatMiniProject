@@ -27,17 +27,16 @@ public class ClientWantsToBroadcastToRoom : BaseEventHandler<ClientWantsToBroadc
     public override Task Handle(ClientWantsToBroadcastToRoomDto dto, IWebSocketConnection socket)
     {
         var _username = ConnectionStates.Connections[socket.ConnectionInfo.Id].Username;
-        var message = new ServerBroadcastMessageWithUsername()
-        {
-            Message = dto.Message,
-            Username = _username
-        };
-        _repo.InsertMessage(new MessagesInRooms()
+        var newMessage = _repo.InsertMessage(new MessagesInRooms()
         {
             message = dto.Message,
             username = _username,
             roomid = dto.RoomId
         });
+        var message = new ServerBroadcastMessageWithUsername()
+        {
+            message = newMessage
+        };
         ConnectionStates.BroadcastToRoom(dto.RoomId, JsonSerializer.Serialize(message));
         return Task.CompletedTask;
     }

@@ -13,14 +13,15 @@ public class ChatRepository
         _dataSource = dataSource;
     }
     
-    public void InsertMessage(MessagesInRooms dataModels)
+    public MessagesInRooms InsertMessage(MessagesInRooms dataModels)
     {
         var sql = $@"
                     INSERT INTO main.messages (username, message, roomid) 
-                    VALUES (@username, @message, @roomid)";
+                    VALUES (@username, @message, @roomid)
+                    RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            conn.Execute(sql, new { dataModels.username, dataModels.message, dataModels.roomid});
+            return conn.QueryFirst<MessagesInRooms>(sql, new { dataModels.username, dataModels.message, dataModels.roomid});
         }
     }
 
@@ -33,6 +34,17 @@ public class ChatRepository
         using (var conn = _dataSource.OpenConnection())
         {
             return conn.Query<MessagesInRooms>(sql, new { roomid });
+        }
+    }
+
+    public IEnumerable<int> GetRooms()
+    {
+        var sql = @"SELECT DISTINCT roomid
+                    FROM main.messages;";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<int>(sql);
         }
     }
 }

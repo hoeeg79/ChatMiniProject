@@ -1,19 +1,14 @@
-<div class="container" *ngIf="!signedIn">
-    <div class="row">
-        <div class="col-xs-12">
-            <label for="form-control">Type Username</label>
-            <input type="text" class="form-control">
-            <button class="btn btn-primary" (click)="onSignIn()" style="margin-top: 10px;">Sign In</button>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <nav class="navbar navbar-light bg-light-subtle">
+        <a class="navbar-brand" (click)="onHomeButtonPress()">
+          <img src="../../images/logo.jpg">
+          The Chad
+        </a>
+        <span class="navbar-brand mb-0 h1" *ngIf="state.inRoom">Welcome To Room {{ state.currentRoom }}</span>
+      </nav>
+      <router-outlet></router-outlet>
     </div>
-</div>
-
-<br>
-
-<div class="container" *ngIf="signedIn">
-    <div class="row">
-        <div class="col-xs-12">
-            <app-rooms *ngFor="let room of rooms"></app-rooms>
-        </div>
-    </div>
+  </div>
 </div>

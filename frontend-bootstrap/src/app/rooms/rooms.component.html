@@ -1,1 +1,18 @@
-<button class="btn">press me</button>
+<div class="container-fluid vh-100 d-flex flex-column">
+  <div class="row flex-grow-1">
+    <div class="col-xs-12 d-flex flex-column">
+      <div *ngFor="let message of state.messages" class="message-wrapper" class="message-container"
+           style="max-height: 70vh; overflow-y: auto;">
+        <div
+          [ngClass]="{'message-left': message.username !== state.username, 'message-right': message.username === state.username}">
+          <p>{{ message.username }}: {{ message.message }}</p>
+        </div>
+      </div>
+      <div class="input-container mt-3">
+        <input type="text" class="form-control" placeholder="Type your message..." [formControl]="messageField">
+        <button class="btn btn-primary mt-2" (click)="onSendMessage()" style="margin: 5px">Send</button>
+        <button class="btn btn-danger mt-2" (click)="onDeleteMessage()" style="margin: 5px">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container" *ngIf="!state.signedIn">
+  <div class="row">
+    <label for="form-control">Type Username</label>
+    <input type="text" class="form-control" [formControl]="username">
+    <button class="btn btn-primary" (click)="onSignIn()" style="margin-top: 10px;">Sign In</button>
+  </div>
+</div>
+
+<br>
+
+<div class="container" *ngIf="state.signedIn">
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onEnterRoom(room)" *ngFor="let room of state.rooms" style="margin: 5px;">
+        Enter room: {{ room }}
+      </button>
+      <hr>
+      <label for="form-control">Create New Room</label>
+      <input type="number" class="form-control" [formControl]="newRoom">
+      <button class="btn btn-secondary" (click)="onCreateNewRoom($event)" style="margin-top: 10px;">Create new room
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
+import { FormControl } from '@angular/forms';
+import { ServerLogInResponseDto, BaseDto } from './BaseDto';
+import {Router} from "@angular/router";
+import {StateService} from "./state.service";
 
 @Component({
   selector: 'app-root',
@@ -8,10 +12,11 @@ import { RoomsComponent } from './rooms/rooms.component';
 })
 export class AppComponent {
   title = 'The Chad';
-  rooms = [new RoomsComponent, new RoomsComponent];
-  signedIn: boolean = false;
+  constructor(private router: Router, public state: StateService){}
 
-  onSignIn(){
-    this.signedIn = true;
+  onHomeButtonPress() {
+    this.state.inRoom = false;
+    this.state.messages = [];
+    this.router.navigateByUrl('')
   }
 }
