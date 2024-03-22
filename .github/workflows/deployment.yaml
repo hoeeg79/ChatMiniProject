@@ -19,4 +19,5 @@ jobs:
           docker: false
           appdir: "api"
         env:
-          HD_
+          HD_PGCONN: ${{ secrets.HD_EL }}
+          

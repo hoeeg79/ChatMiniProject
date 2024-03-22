@@ -17,20 +17,22 @@ public class ClientWantsToEnterRoomDto : BaseDto
 [AuthenticationValidation]
 public class ClientWantsToEnterRoom : BaseEventHandler<ClientWantsToEnterRoomDto>
 {
-    //private readonly ChatDBRepository _repo;
+    private readonly ChatDBRepository _repo;
 
-    public ClientWantsToEnterRoom()
-    { }
+    public ClientWantsToEnterRoom(ChatDBRepository repo)
+    {
+        _repo = repo;
+    }
     public override Task Handle(ClientWantsToEnterRoomDto dto, IWebSocketConnection socket)
     {
         if (ConnectionStates.AddToRoom(socket, dto.RoomId))
         {
-            //var _oldMessages = _repo.GetMessages(dto.RoomId);
-            var oldMessages = new List<MessagesInRooms>();
+            var oldMessages = _repo.GetMessages(dto.RoomId);
+            //var oldMessages = new List<MessagesInRooms>();
             socket.Send(JsonSerializer.Serialize(new ServerAddsClientToRoom()
             {
                 message = $"Welcome to room with ID = {dto.RoomId}",
-                oldMessages = oldMessages
+                oldMessages = oldMessages.ToList()
             }));
             return Task.CompletedTask;
         }

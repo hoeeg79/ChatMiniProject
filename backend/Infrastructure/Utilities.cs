@@ -2,7 +2,7 @@
 
 public class Utilities
 {
-    private static readonly Uri Uri = new Uri(Environment.GetEnvironmentVariable("pgconn") ?? string.Empty);
+    private static readonly Uri Uri = new Uri(Environment.GetEnvironmentVariable("PGCONN")!);
     
     public static readonly string
         ProperlyFormattedConnectionString = string.Format(
