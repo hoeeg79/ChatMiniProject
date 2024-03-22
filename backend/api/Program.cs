@@ -20,11 +20,14 @@ public static class Startup
 
         builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString,
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
-        builder.Services.AddSingleton<ChatRepository>();
+        builder.Services.AddSingleton<ChatDBRepository>();
 
         var app = builder.Build();
+        builder.WebHost.UseUrls("http://*:9999");
 
-        var server = new WebSocketServer("ws://0.0.0.0:8181");
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "8181";
+        
+        var server = new WebSocketServer("ws://0.0.0.0:" + port);
         server.Start(ws =>
         {
             ws.OnOpen = () =>

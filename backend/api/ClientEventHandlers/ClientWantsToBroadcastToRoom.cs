@@ -18,21 +18,29 @@ public class ClientWantsToBroadcastToRoomDto : BaseDto
 [AuthenticationValidation]
 public class ClientWantsToBroadcastToRoom : BaseEventHandler<ClientWantsToBroadcastToRoomDto>
 {
-    private readonly ChatRepository _repo;
+    //private readonly ChatDBRepository _repo;
 
-    public ClientWantsToBroadcastToRoom(ChatRepository repo)
-    {
-        _repo = repo;
-    }
+    public ClientWantsToBroadcastToRoom()
+    { }
     public override Task Handle(ClientWantsToBroadcastToRoomDto dto, IWebSocketConnection socket)
     {
-        var _username = ConnectionStates.Connections[socket.ConnectionInfo.Id].Username;
-        var newMessage = _repo.InsertMessage(new MessagesInRooms()
+        var username = ConnectionStates.Connections[socket.ConnectionInfo.Id].Username;
+        /*
+         var newMessage = _repo.InsertMessage(new MessagesInRooms()
         {
             message = dto.Message,
             username = _username,
             roomid = dto.RoomId
         });
+        */
+
+        var newMessage = new MessagesInRooms()
+        {
+            message = dto.Message,
+            username = username,
+            roomid = dto.RoomId
+        };
+        
         var message = new ServerBroadcastMessageWithUsername()
         {
             message = newMessage

@@ -16,18 +16,18 @@ public class ClientWantsToSignInDto : BaseDto
 public class ClientWantsToSignIn : BaseEventHandler<ClientWantsToSignInDto>
 {
 
-    private readonly ChatRepository _repo;
+    //private readonly ChatDBRepository _repo;
 
-    public ClientWantsToSignIn(ChatRepository repo)
-    {
-        _repo = repo;
-    }
+    public ClientWantsToSignIn()
+    { }
     public override Task Handle(ClientWantsToSignInDto dto, IWebSocketConnection socket)
     {
         ConnectionStates.Connections[socket.ConnectionInfo.Id].Username = dto.Username;
         ConnectionStates.Connections[socket.ConnectionInfo.Id].IsAuthenticated = true;
         
-        var rooms = _repo.GetRooms().ToList();
+        //var rooms = _repo.GetRooms().ToList();
+        var rooms = ConnectionStates.Rooms.Keys.ToList();
+        
         var message = new ServerLogInResponse()
         {
             rooms = rooms

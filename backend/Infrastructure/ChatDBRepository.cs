@@ -4,11 +4,11 @@ using Npgsql;
 
 namespace Infrastructure;
 
-public class ChatRepository
+public class ChatDBRepository : IRepo
 {
     private NpgsqlDataSource _dataSource;
 
-    public ChatRepository(NpgsqlDataSource dataSource)
+    public ChatDBRepository(NpgsqlDataSource dataSource)
     {
         _dataSource = dataSource;
     }
